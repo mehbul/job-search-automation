@@ -41,6 +41,68 @@ for strong matches (score ≥ 3.0)
 
 ---
 
+## How It All Connects
+
+This is the full picture — how GitHub Actions, Apify, and Claude Code career-ops work together:
+
+```
+┌─────────────────────────────────────────────────────┐
+│           CLOUD (GitHub Actions — 8 AM IST)         │
+│                                                     │
+│  apify-fetch.mjs runs                               │
+│    → reads your target roles + location             │
+│    → scrapes LinkedIn via Apify                     │
+│    → filters by title keywords                      │
+│    → deduplicates against already-seen jobs         │
+│    → commits new URLs to data/pipeline.md           │
+└─────────────────────┬───────────────────────────────┘
+                      │
+                      │  data/pipeline.md updated in repo
+                      │
+┌─────────────────────▼───────────────────────────────┐
+│           YOUR LOCAL MACHINE (whenever you want)    │
+│                                                     │
+│  git pull                ← get fresh pipeline.md   │
+│  claude                  ← open Claude Code         │
+│  /career-ops pipeline    ← AI takes over            │
+│                                                     │
+│  career-ops:                                        │
+│    → reads each job URL from pipeline.md            │
+│    → fetches the full job description               │
+│    → reads your cv.md + config/profile.yml          │
+│    → scores the role A–F across 10 dimensions       │
+│    → writes report → reports/001-company-date.md    │
+│    → generates tailored CV PDF → output/            │
+│    → logs entry → data/applications.md             │
+└─────────────────────────────────────────────────────┘
+```
+
+**The handoff file is `data/pipeline.md`** — GitHub Actions writes job URLs into it every morning, career-ops reads and processes them when you're ready.
+
+---
+
+## Your Daily Routine
+
+Once set up, this is all you do each day:
+
+```bash
+# 1. Get the fresh jobs scraped overnight
+git pull
+
+# 2. Open Claude Code in the project folder
+claude
+
+# 3. Let AI evaluate everything
+/career-ops pipeline
+
+# 4. Check the reports — only apply to A/B grades
+# Reports are in reports/ — open any to see the full breakdown
+```
+
+That's it. The boring part (finding jobs) runs automatically. You only spend time on the interesting part (deciding which ones to pursue).
+
+---
+
 ## What I Added on Top of career-ops
 
 [career-ops](https://github.com/santifer/career-ops) by [@santifer](https://github.com/santifer) is the AI evaluation engine. I built the automated scraping layer on top:
