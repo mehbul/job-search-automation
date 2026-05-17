@@ -1,0 +1,103 @@
+name: Daily Job Fetch
+
+on:
+  schedule:
+    - cron: '30 2 * * *'  # 8:00 AM IST (UTC+5:30) every day
+  workflow_dispatch:        # manual trigger from GitHub UI anytime
+
+jobs:
+  fetch-jobs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write       # needed to commit pipeline.md back to repo
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      # Generates a minimal profile at runtime — NO personal info (name/email/phone)
+      # Only the search parameters needed by apify-fetch.mjs
+      - name: Create search config
+        run: |
+          mkdir -p config
+          cat > config/profile.yml << 'EOF'
+          target_roles:
+            primary:
+              - "Performance Engineer"
+              - "Performance Test Engineer"
+              - "Senior Performance Engineer"
+          location:
+            country: "India"
+          compensation:
+            location_flexibility: "Remote worldwide"
+          EOF
+
+      # Title filters — what counts as a relevant job title
+      - name: Create portals config
+        run: |
+          cat > portals.yml << 'EOF'
+          title_filter:
+            positive:
+              - "Performance Engineer"
+              - "Performance Test"
+              - "Performance Testing"
+              - "Load Test"
+              - "Load Testing"
+              - "Performance QA"
+              - "NFR"
+              - "Non-Functional"
+              - "SDET"
+              - "QA Automation"
+              - "Test Automation"
+              - "Automation Engineer"
+              - "Site Reliability"
+              - "SRE"
+              - "Reliability Engineer"
+              - "Observability"
+              - "APM"
+            negative:
+              - "Junior"
+              - "Intern"
+              - ".NET"
+              - "Java "
+              - "iOS"
+              - "Android"
+              - "PHP"
+              - "Ruby"
+              - "Embedded"
+              - "Firmware"
+              - "FPGA"
+              - "ASIC"
+              - "Blockchain"
+              - "Web3"
+              - "Crypto"
+              - "Salesforce Admin"
+              - "SAP "
+              - "Oracle EBS"
+              - "Mainframe"
+              - "COBOL"
+          EOF
+
+      - name: Fetch jobs from LinkedIn via Apify
+        env:
+          APIFY_API_TOKEN: ${{ secrets.APIFY_API_TOKEN }}  # set this in repo Settings → Secrets
+        run: node apify-fetch.mjs
+
+      # pipeline.md is gitignored (personal data default) — force-add it here
+      # so the cloud run can persist results back to the repo
+      - name: Commit updated pipeline
+        run: |
+          mkdir -p data
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f data/pipeline.md
+          git diff --staged --quiet || git commit -m "chore: daily job fetch $(date -u +%Y-%m-%d)"
+          git push
