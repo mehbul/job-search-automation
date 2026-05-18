@@ -1,8 +1,11 @@
 import { chromium } from 'playwright';
-import { resolve } from 'path';
+import { resolve, dirname } from 'path';
+import { fileURLToPath } from 'url';
 
-const htmlPath = resolve('..', 'career-ops-infographic.html');
-const outPath  = resolve('..', 'career-ops-infographic.png');
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+const htmlPath = resolve(__dirname, 'career-ops-infographic.html');
+const outPath  = resolve(__dirname, 'career-ops-infographic.png');
 const fileUrl  = 'file:///' + htmlPath.split('\\').join('/');
 
 const browser = await chromium.launch();
