@@ -43,6 +43,14 @@ const ACTOR_ID = "curious_coder~linkedin-jobs-scraper";
 // Max jobs per search query — keep at 25–50 to stay within Apify free tier
 const MAX_JOBS_PER_QUERY = parseInt(process.env.APIFY_MAX_JOBS_PER_QUERY || "25", 10);
 
+// Time filters — scrape both windows for maximum coverage
+// r86400 = past 24 hours (fresh daily jobs)
+// r604800 = past 1 week (catches anything missed in prior runs)
+const TIME_FILTERS = [
+  { label: "24h",  value: "r86400"  },
+  { label: "7d",   value: "r604800" },
+];
+
 // ── Load config from career-ops profile files ─────────────────────────────────
 
 function loadProfile() {
@@ -199,42 +207,44 @@ async function main() {
 
   for (const query of queries) {
     for (const location of locations) {
-      const searchUrl = `https://www.linkedin.com/jobs/search/?keywords=${encodeURIComponent(query)}&location=${encodeURIComponent(location)}`;
-      process.stdout.write(`Scraping "${query}" in "${location}"...`);
+      for (const timeFilter of TIME_FILTERS) {
+        const searchUrl = `https://www.linkedin.com/jobs/search/?keywords=${encodeURIComponent(query)}&location=${encodeURIComponent(location)}&f_TPR=${timeFilter.value}`;
+        process.stdout.write(`Scraping "${query}" in "${location}" [${timeFilter.label}]...`);
 
-      let runId;
-      try {
-        runId = await startRun(searchUrl);
-        await waitForRun(runId);
-      } catch (err) {
-        console.warn(`  WARN: ${err.message} — skipping`);
-        continue;
+        let runId;
+        try {
+          runId = await startRun(searchUrl);
+          await waitForRun(runId);
+        } catch (err) {
+          console.warn(`  WARN: ${err.message} — skipping`);
+          continue;
+        }
+
+        const items = await fetchItems(runId);
+        let added = 0;
+
+        for (const item of items) {
+          const url = item.link || item.jobUrl || item.url;
+          const title = item.title || item.jobTitle || "";
+          const company = item.companyName || item.company || "";
+          const location2 = item.location || "";
+
+          if (!url) continue;
+
+          // Normalise URL for dedup
+          let urlKey = url;
+          try { urlKey = new URL(url).pathname; } catch { /* keep raw */ }
+          if (existingUrls.has(urlKey)) continue;
+
+          if (!titleMatches(title, positiveKeywords, negativeKeywords)) continue;
+
+          existingUrls.add(urlKey);
+          allNew.push({ url, title, company, location: location2, date: new Date().toISOString().slice(0, 10) });
+          added++;
+        }
+
+        console.log(`  → ${items.length} scraped, ${added} new matches`);
       }
-
-      const items = await fetchItems(runId);
-      let added = 0;
-
-      for (const item of items) {
-        const url = item.link || item.jobUrl || item.url;
-        const title = item.title || item.jobTitle || "";
-        const company = item.companyName || item.company || "";
-        const location2 = item.location || "";
-
-        if (!url) continue;
-
-        // Normalise URL for dedup
-        let urlKey = url;
-        try { urlKey = new URL(url).pathname; } catch { /* keep raw */ }
-        if (existingUrls.has(urlKey)) continue;
-
-        if (!titleMatches(title, positiveKeywords, negativeKeywords)) continue;
-
-        existingUrls.add(urlKey);
-        allNew.push({ url, title, company, location: location2, date: new Date().toISOString().slice(0, 10) });
-        added++;
-      }
-
-      console.log(`  → ${items.length} scraped, ${added} new matches`);
     }
   }
 
