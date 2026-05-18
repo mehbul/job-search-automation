@@ -1,6 +1,6 @@
 # job-search-automation
 
-> AI-powered job search pipeline — scrapes LinkedIn daily via Apify, scores every role against your CV using [career-ops](https://github.com/santifer/career-ops) + Claude, and generates tailored resume PDFs. Zero manual searching.
+> AI-powered end-to-end job search pipeline — scrapes LinkedIn daily via Apify, scores every role A–F against your CV using [career-ops](https://github.com/santifer/career-ops) + Claude, generates tailored resume PDFs, finds recruiters, preps you for interviews, and tracks every application. Zero manual searching.
 
 <p align="center">
   <img src="https://img.shields.io/badge/Built_on-career--ops-000?style=flat&logo=anthropic&logoColor=white" alt="Built on career-ops">
@@ -100,6 +100,87 @@ claude
 ```
 
 That's it. The boring part (finding jobs) runs automatically. You only spend time on the interesting part (deciding which ones to pursue).
+
+---
+
+## Full Command Reference
+
+All commands run inside Claude Code (`claude`) from your project folder.
+
+### 🔁 Core Pipeline
+
+| Command | What it does | When to use |
+|---------|-------------|-------------|
+| `/career-ops pipeline` | Processes all pending URLs from `data/pipeline.md` — evaluates, scores, generates PDFs, updates tracker | Every morning after `git pull` |
+| `/career-ops {URL or JD text}` | Full evaluation of a single job (paste URL or JD directly) | Any time you spot a role manually |
+| `/career-ops scan` | Zero-token scanner — hits Greenhouse, Ashby & Lever APIs for 45+ companies directly | Weekly, to catch roles not on LinkedIn |
+
+### 📊 Evaluation & Scoring
+
+| Command | What it does | When to use |
+|---------|-------------|-------------|
+| `/career-ops oferta` | Deep A–G evaluation of one role (no auto PDF) | When you want to analyse a role carefully |
+| `/career-ops ofertas` | Side-by-side comparison of multiple roles | When you have 2+ strong options |
+| `/career-ops tracker` | Full application status dashboard | Every Monday morning |
+| `/career-ops patterns` | Detects rejection patterns across your history | After every 10–15 applications |
+
+### 📄 CV & Applications
+
+| Command | What it does | When to use |
+|---------|-------------|-------------|
+| `/career-ops pdf` | Generate a tailored CV PDF for a specific role | Before applying to any A/B role |
+| `/career-ops apply` | Live application assistant — reads the form, drafts answers, stops before Submit | When a role has a long application form |
+
+### 🔍 Research & Outreach
+
+| Command | What it does | When to use |
+|---------|-------------|-------------|
+| `/career-ops deep` | Full company intelligence report (funding, culture, tech stack, layoff history) | Before applying to any A/B company |
+| `/career-ops contacto` | Finds the right person to contact + drafts a personalised LinkedIn DM | After applying — boosts response rate 3× |
+| `/career-ops interview-prep` | Company-specific interview prep doc with likely questions + STAR stories | The day before any interview |
+
+### 📅 Follow-Up & Tracking
+
+| Command | What it does | When to use |
+|---------|-------------|-------------|
+| `/career-ops followup` | Flags overdue follow-ups + drafts follow-up emails | Every Friday |
+| `/career-ops training` | Evaluates whether a course/cert is worth your time | Before paying for any certification |
+| `/career-ops project` | Scores a side project idea for career/resume value | Before starting a new project |
+
+---
+
+## How the Scoring Works
+
+career-ops evaluates each job across 6 dimensions and assigns a global score from 1–5:
+
+| Score | Grade | Action |
+|-------|-------|--------|
+| 4.5–5.0 | A | Strong match — apply immediately |
+| 4.0–4.4 | B | Good fit — worth applying |
+| 3.5–3.9 | C | Partial fit — apply if specifically interested |
+| 3.0–3.4 | D | Weak fit — consider carefully |
+| < 3.0 | F | Not worth your time — skip |
+
+The system **never submits an application**. You always review before clicking Apply.
+
+---
+
+## Weekly Workflow (Full)
+
+```
+Monday     → git pull + /career-ops pipeline   (evaluate overnight jobs)
+             /career-ops tracker               (review status of all apps)
+
+Tuesday–   → /career-ops deep {company}        (research before applying)
+Thursday     /career-ops apply {URL}           (fill application forms)
+             /career-ops contacto {URL}        (DM the team after applying)
+
+Friday     → /career-ops followup              (chase overdue applications)
+             /career-ops scan                  (catch jobs not on LinkedIn)
+
+Anytime    → /career-ops interview-prep {URL}  (before any interview)
+             /career-ops ofertas               (when comparing multiple offers)
+```
 
 ---
 
@@ -237,45 +318,90 @@ You can also run it anytime from **Actions → Daily Job Fetch → Run workflow*
 
 ---
 
-## How the Scoring Works
-
-career-ops evaluates each job across 10 dimensions and assigns a score from 1–5:
-
-| Score | Grade | Meaning |
-|-------|-------|---------|
-| 4.5–5.0 | A | Strong match — prioritize |
-| 4.0–4.4 | B | Good fit — worth applying |
-| 3.5–3.9 | C | Partial fit — apply if interested |
-| 3.0–3.4 | D | Weak fit — consider carefully |
-| < 3.0 | F | Not worth your time |
-
-The system never submits an application. You always review before clicking Apply.
-
----
-
 ## Project Structure
 
 ```
 job-search-automation/
-├── apify-fetch.mjs              # LinkedIn scraper bridge (the core addition)
+├── apify-fetch.mjs              # LinkedIn scraper bridge
 ├── run-daily.mjs                # Daily automation wrapper
 ├── setup-windows-task.ps1       # Windows Task Scheduler setup
 ├── setup-cron.sh                # Mac/Linux cron setup
 ├── APIFY_SETUP.md               # Detailed Apify setup guide
+│
 ├── .github/
 │   └── workflows/
-│       └── daily-fetch.yml      # GitHub Actions daily schedule
-├── .env.example                 # Environment variable template
+│       └── daily-fetch.yml      # GitHub Actions — runs daily at 8 AM IST
+│
 ├── config/
 │   └── profile.example.yml      # Profile template (copy → profile.yml)
+│
 ├── templates/
-│   └── portals.example.yml      # Title filter template (copy → portals.yml)
+│   └── cv-template.html         # HTML CV template (A4, ATS-optimized)
+│   └── portals.example.yml      # Title filter + company list template
+│
+├── modes/                       # career-ops AI evaluation logic
+│   ├── oferta.md                # A–G job evaluation engine
+│   ├── pipeline.md              # Batch pipeline processor
+│   ├── scan.md                  # Zero-token portal scanner
+│   ├── deep.md                  # Company deep research
+│   ├── contacto.md              # LinkedIn outreach generator
+│   ├── interview-prep.md        # Interview prep generator
+│   ├── apply.md                 # Application form assistant
+│   ├── ofertas.md               # Multi-offer comparator
+│   ├── pdf.md                   # Tailored CV PDF generator
+│   ├── tracker.md               # Application status dashboard
+│   ├── patterns.md              # Rejection pattern analyser
+│   ├── followup.md              # Follow-up cadence tracker
+│   ├── training.md              # Course/cert evaluator
+│   └── project.md               # Side project evaluator
+│
 ├── data/
-│   └── pipeline.md              # Inbox of new job URLs (auto-updated daily)
+│   ├── pipeline.md              # Inbox of new job URLs (auto-updated daily)
+│   ├── applications.md          # Full application tracker (gitignored)
+│   └── follow-ups.md            # Follow-up history (gitignored)
+│
+├── interview-prep/
+│   └── story-bank.md            # Reusable STAR+R stories (built over time)
+│
+├── writing-samples/             # Add your cover letters/LinkedIn About here
+│                                # → AI learns your voice and writes like you
+│
 ├── reports/                     # AI evaluation reports (gitignored)
 ├── output/                      # Generated CV PDFs (gitignored)
-└── modes/                       # career-ops evaluation logic
+└── cv.md                        # Your CV in markdown (gitignored)
 ```
+
+### Privacy by Design
+
+Files marked **gitignored** contain personal data and never leave your machine:
+`cv.md` · `config/profile.yml` · `data/applications.md` · `data/pipeline.md` · `reports/` · `output/`
+
+---
+
+## Power Features — Unlock Over Time
+
+### ✍️ Writing Style Calibration
+Drop any personal writing into `writing-samples/` (a past cover letter, your LinkedIn About section, an email you wrote) and the system learns your voice — tone, sentence length, vocabulary, punctuation style. Every cover letter, outreach message, and application answer it generates will sound like *you*, not generic AI.
+
+```
+writing-samples/
+├── cover-letter-example.md     ← past cover letter
+├── linkedin-about.md           ← your LinkedIn About section
+└── any-professional-writing.md ← emails, blog posts, anything
+```
+
+### 📖 STAR+R Story Bank
+Every evaluation builds your `interview-prep/story-bank.md` — a growing library of reusable interview stories. After 20–30 evaluations you'll have a polished bank of 10–15 master stories that can be adapted to any interview question at any company.
+
+### 🔄 Auto-Update System
+career-ops updates silently in the background. Your data (`cv.md`, reports, tracker) is never touched by updates. To check manually: open Claude Code and say *"check for updates"*.
+
+### 🌍 International Job Markets
+Switch evaluation language by setting `language.modes_dir` in `config/profile.yml`:
+- `modes/de` → German (DACH market)
+- `modes/fr` → French (France, Belgium, Switzerland)
+- `modes/ja` → Japanese (Japan)
+- `modes/tr` → Turkish (Turkey)
 
 ---
 
