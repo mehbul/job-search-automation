@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Job-Search-Automation Infographic</title>
+<title>I Automated My Friend's Job Search</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -13,794 +13,639 @@
     width: 1200px;
   }
 
-  /* ── HEADER ── */
-  .header {
-    background: linear-gradient(135deg, #1a0836 0%, #0c0c28 45%, #090e22 100%);
-    padding: 52px 56px 46px;
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #1a0836 0%, #0c0c28 50%, #090e22 100%);
+    padding: 56px 60px 50px;
     position: relative;
     overflow: hidden;
-    border-bottom: 1px solid rgba(168,85,247,0.25);
+    border-bottom: 1px solid rgba(168,85,247,0.3);
   }
-  .header::before {
+  .hero::before {
     content: '';
     position: absolute;
-    top: -100px; right: -60px;
-    width: 420px; height: 420px;
-    background: radial-gradient(circle, rgba(168,85,247,0.18) 0%, transparent 68%);
+    top: -120px; right: -80px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(168,85,247,0.15) 0%, transparent 65%);
     pointer-events: none;
   }
-  .header::after {
+  .hero::after {
     content: '';
     position: absolute;
-    bottom: -80px; left: 280px;
-    width: 340px; height: 340px;
-    background: radial-gradient(circle, rgba(236,72,153,0.12) 0%, transparent 65%);
+    bottom: -100px; left: 200px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(236,72,153,0.1) 0%, transparent 65%);
     pointer-events: none;
   }
-  .header-meta {
-    display: flex;
+  .hero-tag {
+    display: inline-flex;
     align-items: center;
-    gap: 14px;
-    margin-bottom: 22px;
-  }
-  .badge {
-    background: linear-gradient(135deg, #7c3aed, #ec4899);
-    color: #fff;
-    font-size: 11px;
-    font-weight: 800;
-    padding: 5px 14px;
+    gap: 8px;
+    background: rgba(168,85,247,0.15);
+    border: 1px solid rgba(168,85,247,0.4);
     border-radius: 20px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
-  .badge-apify {
-    background: linear-gradient(135deg, #0891b2, #06b6d4);
-    color: #fff;
+    padding: 6px 16px;
     font-size: 11px;
-    font-weight: 800;
-    padding: 5px 14px;
-    border-radius: 20px;
-    letter-spacing: 2px;
+    font-weight: 700;
+    color: #c084fc;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
+    margin-bottom: 24px;
   }
-  .meta-text {
-    color: #64748b;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.3px;
-  }
-  .header h1 {
-    font-size: 48px;
+  .hero h1 {
+    font-size: 52px;
     font-weight: 900;
-    line-height: 1.08;
-    margin-bottom: 18px;
-    letter-spacing: -1.5px;
+    line-height: 1.05;
+    letter-spacing: -2px;
     color: #f1f5f9;
+    margin-bottom: 20px;
   }
-  .grad {
-    background: linear-gradient(90deg, #a855f7 0%, #ec4899 50%, #f97316 100%);
+  .hero h1 .accent {
+    background: linear-gradient(90deg, #a855f7, #ec4899, #f97316);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-  .header-desc {
+  .hero-sub {
+    font-size: 16px;
     color: #94a3b8;
-    font-size: 15.5px;
-    line-height: 1.65;
-    max-width: 760px;
+    line-height: 1.7;
+    max-width: 680px;
+    margin-bottom: 32px;
   }
-  .header-stats {
+  .hero-sub strong { color: #e2e8f0; }
+  .hero-stats {
     display: flex;
-    gap: 36px;
-    margin-top: 28px;
+    gap: 0;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 14px;
+    overflow: hidden;
+    width: fit-content;
   }
-  .stat {
+  .hstat {
+    padding: 18px 30px;
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 3px;
+    border-right: 1px solid rgba(255,255,255,0.07);
   }
-  .stat-value {
-    font-size: 26px;
+  .hstat:last-child { border-right: none; }
+  .hstat-val {
+    font-size: 28px;
     font-weight: 900;
-    background: linear-gradient(90deg, #a855f7, #ec4899);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
     letter-spacing: -0.5px;
   }
-  .stat-value.cyan {
-    background: linear-gradient(90deg, #06b6d4, #0891b2);
-    -webkit-background-clip: text;
-    background-clip: text;
-  }
-  .stat-value.green {
-    background: linear-gradient(90deg, #10b981, #34d399);
-    -webkit-background-clip: text;
-    background-clip: text;
-  }
-  .stat-value.orange {
-    background: linear-gradient(90deg, #f97316, #fb923c);
-    -webkit-background-clip: text;
-    background-clip: text;
-  }
-  .stat-label {
-    font-size: 11px;
+  .hstat-val.purple { background: linear-gradient(90deg,#a855f7,#c084fc); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .hstat-val.pink   { background: linear-gradient(90deg,#ec4899,#f472b6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .hstat-val.cyan   { background: linear-gradient(90deg,#06b6d4,#67e8f9); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .hstat-val.green  { background: linear-gradient(90deg,#10b981,#34d399); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .hstat-val.orange { background: linear-gradient(90deg,#f97316,#fb923c); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .hstat-label {
+    font-size: 10.5px;
     color: #475569;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 600;
   }
 
-  /* ── WORKFLOW STRIP ── */
-  .workflow-strip {
-    background: #080814;
-    padding: 24px 56px;
+  /* ── PROBLEM/SOLUTION ── */
+  .ps-section {
+    display: grid;
+    grid-template-columns: 1fr 60px 1fr;
+    gap: 0;
+    background: #08081a;
     border-bottom: 1px solid rgba(168,85,247,0.12);
   }
-  .workflow-label {
+  .ps-box {
+    padding: 30px 40px;
+  }
+  .ps-box.problem { border-right: none; }
+  .ps-box.solution { border-left: none; background: rgba(124,58,237,0.04); }
+  .ps-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #08081a;
+    font-size: 28px;
+    color: #a855f7;
+    font-weight: 900;
+  }
+  .ps-label {
+    font-size: 9.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+  .ps-label.red { color: #f87171; }
+  .ps-label.green { color: #34d399; }
+  .ps-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: #e2e8f0;
+    margin-bottom: 10px;
+  }
+  .ps-items { list-style: none; }
+  .ps-items li {
+    font-size: 12px;
+    color: #64748b;
+    padding: 4px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.4;
+  }
+  .ps-items li .dot { flex-shrink: 0; margin-top: 3px; width: 6px; height: 6px; border-radius: 50%; }
+  .problem .dot { background: #f87171; }
+  .solution .dot { background: #34d399; }
+
+  /* ── WHAT I BUILT ── */
+  .built-section {
+    background: #0a0a18;
+    padding: 36px 60px;
+    border-bottom: 1px solid rgba(168,85,247,0.12);
+  }
+  .section-label {
     font-size: 10px;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 2.5px;
-    color: #334155;
-    margin-bottom: 14px;
-  }
-  .workflow-row {
+    color: #a855f7;
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
-    gap: 0;
+    gap: 12px;
   }
-  .wf-step {
+  .section-label::after {
+    content: '';
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-    position: relative;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(168,85,247,0.3), transparent);
   }
-  .wf-step:not(:last-child)::after {
-    content: '→';
-    position: absolute;
-    right: -11px;
-    top: 30%;
-    transform: translateY(-50%);
-    color: #1e293b;
-    font-size: 20px;
-    z-index: 1;
-  }
-  .wf-box {
-    background: #0d0d20;
-    border-radius: 10px;
-    padding: 10px 12px;
-    font-size: 12px;
-    font-weight: 700;
-    color: #cbd5e1;
-    text-align: center;
-    width: 100%;
-    border: 1px solid rgba(100,116,139,0.2);
-  }
-  .wf-box.active {
-    border-color: rgba(168,85,247,0.4);
-    color: #e2e8f0;
-    background: rgba(124,58,237,0.08);
-  }
-  .wf-icon { font-size: 18px; }
-  .wf-sub {
-    font-size: 9.5px;
-    color: #334155;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    font-weight: 600;
-    text-align: center;
-  }
-
-  /* ── GRID ── */
-  .grid-wrap {
-    background: #12122b;
-    padding: 3px;
-  }
-  .grid {
+  .built-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 3px;
+    gap: 14px;
   }
-  .card {
-    background: #0a0a18;
-    padding: 26px 22px 22px;
+  .built-card {
+    background: #0d0d22;
+    border: 1px solid rgba(168,85,247,0.2);
+    border-radius: 12px;
+    padding: 22px 20px;
     position: relative;
     overflow: hidden;
   }
-  .card::after {
+  .built-card::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 2px;
+    background: linear-gradient(90deg, #7c3aed, #a855f7);
   }
-  .c1::after  { background: linear-gradient(90deg,#06b6d4,#0891b2); }
-  .c2::after  { background: linear-gradient(90deg,#7c3aed,#a855f7); }
-  .c3::after  { background: linear-gradient(90deg,#a855f7,#c084fc); }
-  .c4::after  { background: linear-gradient(90deg,#ec4899,#f472b6); }
-  .c5::after  { background: linear-gradient(90deg,#f97316,#fb923c); }
-  .c6::after  { background: linear-gradient(90deg,#10b981,#34d399); }
-  .c7::after  { background: linear-gradient(90deg,#6366f1,#818cf8); }
-  .c8::after  { background: linear-gradient(90deg,#f59e0b,#fcd34d); }
-  .c9::after  { background: linear-gradient(90deg,#ef4444,#f87171); }
-  .c10::after { background: linear-gradient(90deg,#8b5cf6,#a78bfa); }
-  .c11::after { background: linear-gradient(90deg,#14b8a6,#2dd4bf); }
-  .c12::after { background: linear-gradient(90deg,#f43f5e,#fb7185); }
+  .built-card:nth-child(2)::before { background: linear-gradient(90deg, #0891b2, #06b6d4); }
+  .built-card:nth-child(3)::before { background: linear-gradient(90deg, #059669, #34d399); }
+  .built-icon { font-size: 26px; margin-bottom: 12px; }
+  .built-title {
+    font-size: 14px;
+    font-weight: 800;
+    color: #e2e8f0;
+    margin-bottom: 4px;
+  }
+  .built-file {
+    font-size: 10px;
+    font-family: 'Courier New', monospace;
+    color: #a855f7;
+    background: rgba(168,85,247,0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+  .built-card:nth-child(2) .built-file { color: #67e8f9; background: rgba(6,182,212,0.1); }
+  .built-card:nth-child(3) .built-file { color: #34d399; background: rgba(16,185,129,0.1); }
+  .built-desc {
+    font-size: 11.5px;
+    color: #64748b;
+    line-height: 1.55;
+  }
+  .built-desc strong { color: #94a3b8; }
 
-  .card-top {
-    display: flex;
-    align-items: flex-start;
-    gap: 13px;
-    margin-bottom: 13px;
+  /* ── HOW IT WORKS ── */
+  .flow-section {
+    background: #070715;
+    padding: 32px 60px;
+    border-bottom: 1px solid rgba(168,85,247,0.12);
   }
-  .num {
-    width: 34px; height: 34px;
-    border-radius: 9px;
+  .flow-row {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin-top: 4px;
+  }
+  .flow-step {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    padding: 0 6px;
+  }
+  .flow-step:not(:last-child)::after {
+    content: '→';
+    position: absolute;
+    right: -10px;
+    top: 28px;
+    color: #334155;
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .flow-icon-wrap {
+    width: 52px; height: 52px;
+    border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
-    font-weight: 900;
-    color: #fff;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .flow-step:nth-child(1) .flow-icon-wrap { background: rgba(6,182,212,0.15); border: 1px solid rgba(6,182,212,0.3); }
+  .flow-step:nth-child(2) .flow-icon-wrap { background: rgba(168,85,247,0.15); border: 1px solid rgba(168,85,247,0.3); }
+  .flow-step:nth-child(3) .flow-icon-wrap { background: rgba(236,72,153,0.15); border: 1px solid rgba(236,72,153,0.3); }
+  .flow-step:nth-child(4) .flow-icon-wrap { background: rgba(249,115,22,0.15); border: 1px solid rgba(249,115,22,0.3); }
+  .flow-step:nth-child(5) .flow-icon-wrap { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+  .flow-step:nth-child(6) .flow-icon-wrap { background: rgba(99,102,241,0.15); border: 1px solid rgba(99,102,241,0.3); }
+  .flow-label-main {
+    font-size: 11px;
+    font-weight: 700;
+    color: #cbd5e1;
+    text-align: center;
+    line-height: 1.3;
+  }
+  .flow-label-sub {
+    font-size: 9.5px;
+    color: #334155;
+    text-align: center;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .flow-mine {
+    font-size: 8.5px;
+    background: rgba(168,85,247,0.15);
+    border: 1px solid rgba(168,85,247,0.3);
+    color: #c084fc;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .flow-oss {
+    font-size: 8.5px;
+    background: rgba(100,116,139,0.15);
+    border: 1px solid rgba(100,116,139,0.2);
+    color: #64748b;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── FEATURES 3×2 ── */
+  .features-section {
+    background: #080814;
+    padding: 32px 60px;
+    border-bottom: 1px solid rgba(168,85,247,0.12);
+  }
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .feat-card {
+    background: #0a0a1c;
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 10px;
+    padding: 18px 16px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .feat-icon {
+    font-size: 22px;
     flex-shrink: 0;
     margin-top: 1px;
   }
-  .c1  .num { background: linear-gradient(135deg,#0891b2,#67e8f9); }
-  .c2  .num { background: linear-gradient(135deg,#7c3aed,#a855f7); }
-  .c3  .num { background: linear-gradient(135deg,#9333ea,#c084fc); }
-  .c4  .num { background: linear-gradient(135deg,#db2777,#f472b6); }
-  .c5  .num { background: linear-gradient(135deg,#ea580c,#fb923c); }
-  .c6  .num { background: linear-gradient(135deg,#059669,#34d399); }
-  .c7  .num { background: linear-gradient(135deg,#4f46e5,#818cf8); }
-  .c8  .num { background: linear-gradient(135deg,#d97706,#fcd34d); }
-  .c9  .num { background: linear-gradient(135deg,#dc2626,#f87171); }
-  .c10 .num { background: linear-gradient(135deg,#7c3aed,#a78bfa); }
-  .c11 .num { background: linear-gradient(135deg,#0f766e,#2dd4bf); }
-  .c12 .num { background: linear-gradient(135deg,#be123c,#fb7185); }
-
-  .card-icon { font-size: 20px; line-height: 1; margin-top: 7px; }
-  .card-titles { flex: 1; }
-  .card-name {
-    font-size: 13.5px;
+  .feat-name {
+    font-size: 12.5px;
     font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.4px;
     color: #e2e8f0;
-    line-height: 1.2;
-    margin-bottom: 3px;
-  }
-  .card-mode {
-    font-size: 10.5px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    opacity: 0.55;
-    color: #94a3b8;
-  }
-  .focus-label {
-    font-size: 10px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    margin-bottom: 7px;
-  }
-  .c1  .focus-label { color: #67e8f9; }
-  .c2  .focus-label { color: #a855f7; }
-  .c3  .focus-label { color: #c084fc; }
-  .c4  .focus-label { color: #f472b6; }
-  .c5  .focus-label { color: #fb923c; }
-  .c6  .focus-label { color: #34d399; }
-  .c7  .focus-label { color: #818cf8; }
-  .c8  .focus-label { color: #fcd34d; }
-  .c9  .focus-label { color: #f87171; }
-  .c10 .focus-label { color: #a78bfa; }
-  .c11 .focus-label { color: #2dd4bf; }
-  .c12 .focus-label { color: #fb7185; }
-
-  .points { list-style: none; }
-  .points li {
-    font-size: 11.5px;
-    color: #64748b;
-    padding: 2.5px 0;
-    display: flex;
-    align-items: flex-start;
-    gap: 7px;
-    line-height: 1.45;
-  }
-  .points li::before { content: '✓'; font-size: 10px; margin-top: 1px; flex-shrink: 0; }
-  .c1  .points li::before { color: #67e8f9; }
-  .c2  .points li::before { color: #a855f7; }
-  .c3  .points li::before { color: #c084fc; }
-  .c4  .points li::before { color: #f472b6; }
-  .c5  .points li::before { color: #fb923c; }
-  .c6  .points li::before { color: #34d399; }
-  .c7  .points li::before { color: #818cf8; }
-  .c8  .points li::before { color: #fcd34d; }
-  .c9  .points li::before { color: #f87171; }
-  .c10 .points li::before { color: #a78bfa; }
-  .c11 .points li::before { color: #2dd4bf; }
-  .c12 .points li::before { color: #fb7185; }
-
-  /* ── DAILY CADENCE ── */
-  .cadence-section {
-    background: #08081a;
-    padding: 30px 56px;
-    border-top: 1px solid rgba(168,85,247,0.15);
-    border-bottom: 1px solid rgba(168,85,247,0.15);
-  }
-  .cadence-heading {
-    font-size: 10px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 2.5px;
-    color: #a855f7;
-    margin-bottom: 16px;
-  }
-  .cadence-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
-  }
-  .cadence-day {
-    background: #0d0d20;
-    border: 1px solid rgba(100,116,139,0.2);
-    border-radius: 10px;
-    padding: 12px 14px;
-  }
-  .cadence-day.highlight {
-    border-color: rgba(168,85,247,0.35);
-    background: rgba(124,58,237,0.06);
-  }
-  .day-name {
-    font-size: 11px;
-    font-weight: 800;
-    color: #a855f7;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 8px;
-  }
-  .day-cmd {
-    font-size: 10px;
-    color: #06b6d4;
-    font-family: 'Courier New', monospace;
-    font-weight: 700;
-    background: rgba(6,182,212,0.08);
-    padding: 2px 6px;
-    border-radius: 4px;
-    display: inline-block;
     margin-bottom: 4px;
   }
-  .day-desc {
-    font-size: 10.5px;
+  .feat-desc {
+    font-size: 11px;
     color: #475569;
-    line-height: 1.4;
-    margin-top: 4px;
+    line-height: 1.45;
   }
 
-  /* ── TAKEAWAY ── */
-  .takeaway-section {
-    background: linear-gradient(135deg, #1a0836 0%, #0c0c28 60%, #090e22 100%);
-    padding: 34px 56px;
+  /* ── STORY / TAKEAWAY ── */
+  .story-section {
+    background: linear-gradient(135deg, #120a2a 0%, #0c0c28 50%, #08101e 100%);
+    padding: 36px 60px;
     display: flex;
+    gap: 32px;
     align-items: flex-start;
-    gap: 22px;
+    border-bottom: 1px solid rgba(168,85,247,0.15);
   }
-  .takeaway-icon { font-size: 38px; flex-shrink: 0; margin-top: 2px; }
-  .tk-label {
-    font-size: 10px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 2.5px;
-    color: #a855f7;
-    margin-bottom: 9px;
+  .quote-mark {
+    font-size: 80px;
+    line-height: 0.7;
+    color: rgba(168,85,247,0.3);
+    font-family: Georgia, serif;
+    flex-shrink: 0;
+    margin-top: 8px;
   }
-  .tk-text {
-    font-size: 14.5px;
+  .story-text {
+    font-size: 15px;
     color: #cbd5e1;
-    line-height: 1.65;
-    margin-bottom: 14px;
+    line-height: 1.75;
+    margin-bottom: 16px;
   }
-  .tk-text strong { color: #f1f5f9; font-weight: 700; }
-  .tk-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .story-text strong { color: #f1f5f9; }
+  .story-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
   .chip {
-    background: rgba(168,85,247,0.12);
-    border: 1px solid rgba(168,85,247,0.3);
+    padding: 5px 14px;
     border-radius: 6px;
-    padding: 4px 13px;
     font-size: 11.5px;
     font-weight: 600;
-    color: #c084fc;
   }
-  .chip.cyan {
-    background: rgba(6,182,212,0.1);
-    border-color: rgba(6,182,212,0.3);
-    color: #67e8f9;
-  }
+  .chip-purple { background: rgba(168,85,247,0.12); border: 1px solid rgba(168,85,247,0.3); color: #c084fc; }
+  .chip-cyan   { background: rgba(6,182,212,0.1);  border: 1px solid rgba(6,182,212,0.3);  color: #67e8f9; }
+  .chip-green  { background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3); color: #34d399; }
 
   /* ── FOOTER ── */
   .footer {
     background: #03030a;
-    padding: 18px 56px;
+    padding: 20px 60px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     border-top: 1px solid rgba(255,255,255,0.04);
   }
-  .footer-left { display: flex; align-items: center; gap: 12px; }
+  .footer-left { display: flex; align-items: center; gap: 14px; }
   .footer-logo {
     background: linear-gradient(135deg, #a855f7, #ec4899);
     color: #fff;
     font-size: 12px;
     font-weight: 900;
-    padding: 5px 13px;
-    border-radius: 7px;
-    letter-spacing: 0.3px;
+    padding: 6px 14px;
+    border-radius: 8px;
   }
-  .footer-tagline { color: #334155; font-size: 12px; font-weight: 500; }
-  .footer-right { color: #1e293b; font-size: 12px; }
+  .footer-name { color: #475569; font-size: 12.5px; }
+  .footer-name strong { color: #64748b; }
+  .footer-github {
+    font-size: 11.5px;
+    color: #334155;
+    font-family: 'Courier New', monospace;
+  }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<div class="header">
-  <div class="header-meta">
-    <span class="badge">Job-Search-Automation</span>
-    <span class="badge-apify">Apify + GitHub Actions</span>
-    <span class="meta-text">Built on career-ops · Claude Code · Privacy-First · Open Source</span>
-  </div>
-  <h1>THE COMPLETE AI<br><span class="grad">JOB SEARCH PIPELINE</span></h1>
-  <p class="header-desc">Zero manual searching. LinkedIn scraped daily at 8 AM, every job evaluated A–F against your CV, tailored PDFs generated, recruiters found, interviews prepped — fully automated end to end.</p>
-  <div class="header-stats">
-    <div class="stat">
-      <span class="stat-value cyan">73</span>
-      <span class="stat-label">Jobs Scraped Daily</span>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">🤖 Personal Project · Open Source MIT · Node.js + Apify + Claude AI</div>
+  <h1>I automated my<br>friend's <span class="accent">job search.</span></h1>
+  <p class="hero-sub">
+    My friend was spending <strong>2+ hours every day</strong> manually scrolling LinkedIn for performance engineering roles — bookmarking jobs, copy-pasting descriptions, guessing which ones were worth applying to.<br><br>
+    I spent a weekend building a system that does all of it automatically. Here's what I built.
+  </p>
+  <div class="hero-stats">
+    <div class="hstat">
+      <span class="hstat-val cyan">73</span>
+      <span class="hstat-label">Jobs scraped daily</span>
     </div>
-    <div class="stat">
-      <span class="stat-value">77</span>
-      <span class="stat-label">Evaluated This Run</span>
+    <div class="hstat">
+      <span class="hstat-val purple">77</span>
+      <span class="hstat-label">Roles evaluated (1 run)</span>
     </div>
-    <div class="stat">
-      <span class="stat-value green">9</span>
-      <span class="stat-label">Tailored CVs Generated</span>
+    <div class="hstat">
+      <span class="hstat-val green">9</span>
+      <span class="hstat-label">Tailored CVs generated</span>
     </div>
-    <div class="stat">
-      <span class="stat-value orange">15</span>
-      <span class="stat-label">Commands Available</span>
+    <div class="hstat">
+      <span class="hstat-val orange">0 min</span>
+      <span class="hstat-label">Manual searching</span>
     </div>
-    <div class="stat">
-      <span class="stat-value">0 min</span>
-      <span class="stat-label">Finding Jobs Manually</span>
-    </div>
-  </div>
-</div>
-
-<!-- WORKFLOW STRIP -->
-<div class="workflow-strip">
-  <div class="workflow-label">⚡ End-to-End Workflow — Fully Automated to Offer</div>
-  <div class="workflow-row">
-    <div class="wf-step">
-      <div class="wf-icon">☁️</div>
-      <div class="wf-box active">GitHub Actions<br>8 AM IST</div>
-      <div class="wf-sub">Auto — No PC</div>
-    </div>
-    <div class="wf-step">
-      <div class="wf-icon">🔍</div>
-      <div class="wf-box active">Apify Scrapes<br>LinkedIn</div>
-      <div class="wf-sub">Filter + Dedup</div>
-    </div>
-    <div class="wf-step">
-      <div class="wf-icon">🧠</div>
-      <div class="wf-box active">AI Scores<br>A–F vs CV</div>
-      <div class="wf-sub">/career-ops pipeline</div>
-    </div>
-    <div class="wf-step">
-      <div class="wf-icon">📄</div>
-      <div class="wf-box active">Tailored CV<br>PDF Generated</div>
-      <div class="wf-sub">Per A/B Role</div>
-    </div>
-    <div class="wf-step">
-      <div class="wf-icon">🏢</div>
-      <div class="wf-box">Company<br>Research</div>
-      <div class="wf-sub">/career-ops deep</div>
-    </div>
-    <div class="wf-step">
-      <div class="wf-icon">💬</div>
-      <div class="wf-box">Recruiter<br>Outreach</div>
-      <div class="wf-sub">/career-ops contacto</div>
-    </div>
-    <div class="wf-step">
-      <div class="wf-icon">🎤</div>
-      <div class="wf-box">Interview<br>Prep</div>
-      <div class="wf-sub">/career-ops interview-prep</div>
-    </div>
-    <div class="wf-step">
-      <div class="wf-icon">⚖️</div>
-      <div class="wf-box">Offer<br>Decision</div>
-      <div class="wf-sub">/career-ops ofertas</div>
+    <div class="hstat">
+      <span class="hstat-val pink">8 AM</span>
+      <span class="hstat-label">Auto-runs daily IST</span>
     </div>
   </div>
 </div>
 
-<!-- 12-CARD GRID -->
-<div class="grid-wrap">
-  <div class="grid">
+<!-- PROBLEM / SOLUTION -->
+<div class="ps-section">
+  <div class="ps-box problem">
+    <div class="ps-label red">❌ Before — The Old Way</div>
+    <div class="ps-title">2+ hours a day, manually</div>
+    <ul class="ps-items">
+      <li><span class="dot"></span>Open LinkedIn, search for "Performance Engineer India"</li>
+      <li><span class="dot"></span>Scroll through 100s of listings, most irrelevant</li>
+      <li><span class="dot"></span>Open each one, read the JD, guess if it's a fit</li>
+      <li><span class="dot"></span>Manually track applications in a spreadsheet</li>
+      <li><span class="dot"></span>Forget which companies you already checked</li>
+      <li><span class="dot"></span>Apply generically with the same CV everywhere</li>
+    </ul>
+  </div>
+  <div class="ps-arrow">→</div>
+  <div class="ps-box solution">
+    <div class="ps-label green">✅ After — Fully Automated</div>
+    <div class="ps-title">git pull → /career-ops pipeline → done</div>
+    <ul class="ps-items">
+      <li><span class="dot"></span>LinkedIn scraped every night at 8 AM on GitHub's servers</li>
+      <li><span class="dot"></span>Every role scored A–F against the CV by Claude AI</li>
+      <li><span class="dot"></span>Full 7-block evaluation report generated per role</li>
+      <li><span class="dot"></span>Tailored PDF CV generated for every strong match</li>
+      <li><span class="dot"></span>Recruiters found, outreach messages drafted</li>
+      <li><span class="dot"></span>Full tracker from Evaluated → Applied → Offer</li>
+    </ul>
+  </div>
+</div>
 
-    <div class="card c1">
-      <div class="card-top">
-        <div class="num">1</div>
-        <div class="card-icon">🤖</div>
-        <div class="card-titles">
-          <div class="card-name">LinkedIn Auto-Scraping</div>
-          <div class="card-mode">Apify + GitHub Actions</div>
-        </div>
+<!-- WHAT I BUILT -->
+<div class="built-section">
+  <div class="section-label">🔧 What I personally built (the scraping layer)</div>
+  <div class="built-grid">
+
+    <div class="built-card">
+      <div class="built-icon">🕷️</div>
+      <div class="built-title">LinkedIn Scraper</div>
+      <div class="built-file">apify-fetch.mjs</div>
+      <div class="built-desc">
+        Hits the <strong>Apify API</strong> to scrape LinkedIn for target roles by location and title.
+        Filters by keyword allowlist/blocklist, deduplicates against all previously seen jobs,
+        and writes fresh URLs into a pipeline inbox file.
       </div>
-      <div class="focus-label">Zero-Touch Discovery</div>
-      <ul class="points">
-        <li>Scrapes LinkedIn daily at 8 AM IST automatically</li>
-        <li>Filters by title keywords, removes duplicates</li>
-        <li>Runs on GitHub — no PC needed overnight</li>
-        <li>Fresh job URLs in pipeline.md every morning</li>
-      </ul>
     </div>
 
-    <div class="card c2">
-      <div class="card-top">
-        <div class="num">2</div>
-        <div class="card-icon">📊</div>
-        <div class="card-titles">
-          <div class="card-name">A–G Offer Evaluation</div>
-          <div class="card-mode">oferta mode</div>
-        </div>
+    <div class="built-card">
+      <div class="built-icon">⏰</div>
+      <div class="built-title">Daily Cloud Automation</div>
+      <div class="built-file">daily-fetch.yml</div>
+      <div class="built-desc">
+        <strong>GitHub Actions workflow</strong> that runs the scraper every morning at 8 AM IST
+        on GitHub's servers — no local machine required. Results are automatically
+        committed back to the repo so my friend just runs <code style="color:#67e8f9;font-size:10px;">git pull</code>.
       </div>
-      <div class="focus-label">Core Intelligence</div>
-      <ul class="points">
-        <li>7-block scoring: CV match, comp, culture, red flags</li>
-        <li>Ghost listing &amp; posting legitimacy detection</li>
-        <li>Gaps identified with mitigation strategies</li>
-        <li>Negotiation script auto-generated per offer</li>
-      </ul>
     </div>
 
-    <div class="card c3">
-      <div class="card-top">
-        <div class="num">3</div>
-        <div class="card-icon">📄</div>
-        <div class="card-titles">
-          <div class="card-name">Tailored CV PDF</div>
-          <div class="card-mode">pdf mode</div>
-        </div>
+    <div class="built-card">
+      <div class="built-icon">🔗</div>
+      <div class="built-title">Integration Architecture</div>
+      <div class="built-file">pipeline.md handoff</div>
+      <div class="built-desc">
+        Designed the <strong>handoff pattern</strong> between cloud scraping and AI evaluation:
+        GitHub Actions writes job URLs into <code style="color:#34d399;font-size:10px;">data/pipeline.md</code>,
+        career-ops reads and processes them. Clean separation of concerns.
       </div>
-      <div class="focus-label">Output Quality</div>
-      <ul class="points">
-        <li>Company-specific PDF — JD keywords injected</li>
-        <li>Your writing style learned from samples</li>
-        <li>ATS-optimized HTML → PDF via Playwright</li>
-        <li>Never invents experience — only reformulates</li>
-      </ul>
-    </div>
-
-    <div class="card c4">
-      <div class="card-top">
-        <div class="num">4</div>
-        <div class="card-icon">🔍</div>
-        <div class="card-titles">
-          <div class="card-name">Portal Scanning</div>
-          <div class="card-mode">scan mode</div>
-        </div>
-      </div>
-      <div class="focus-label">Hidden Job Discovery</div>
-      <ul class="points">
-        <li>Zero-token hits to Greenhouse, Ashby, Lever APIs</li>
-        <li>45+ pre-configured target companies</li>
-        <li>Catches roles never posted on LinkedIn</li>
-        <li>Dedup history — never re-processes seen jobs</li>
-      </ul>
-    </div>
-
-    <div class="card c5">
-      <div class="card-top">
-        <div class="num">5</div>
-        <div class="card-icon">🏢</div>
-        <div class="card-titles">
-          <div class="card-name">Company Research</div>
-          <div class="card-mode">deep mode</div>
-        </div>
-      </div>
-      <div class="focus-label">Pre-Apply Intelligence</div>
-      <ul class="points">
-        <li>Funding, culture, growth &amp; layoff history</li>
-        <li>Tech stack, team structure, Glassdoor signals</li>
-        <li>Red flag &amp; financial health analysis</li>
-        <li>Answers: "Should I trust this company?"</li>
-      </ul>
-    </div>
-
-    <div class="card c6">
-      <div class="card-top">
-        <div class="num">6</div>
-        <div class="card-icon">📝</div>
-        <div class="card-titles">
-          <div class="card-name">Application Assistant</div>
-          <div class="card-mode">apply mode</div>
-        </div>
-      </div>
-      <div class="focus-label">Form Filling</div>
-      <ul class="points">
-        <li>Reads every question on the application form</li>
-        <li>Drafts tailored answers in your voice</li>
-        <li>Always stops before Submit — you decide</li>
-        <li>Cover letter included, same design as CV</li>
-      </ul>
-    </div>
-
-    <div class="card c7">
-      <div class="card-top">
-        <div class="num">7</div>
-        <div class="card-icon">💬</div>
-        <div class="card-titles">
-          <div class="card-name">LinkedIn Outreach</div>
-          <div class="card-mode">contacto mode</div>
-        </div>
-      </div>
-      <div class="focus-label">Networking</div>
-      <ul class="points">
-        <li>Finds hiring manager — not just recruiter</li>
-        <li>Personalised DM draft based on their profile</li>
-        <li>Non-spammy, quality-first messaging</li>
-        <li>Boosts response rate 3× vs cold apply</li>
-      </ul>
-    </div>
-
-    <div class="card c8">
-      <div class="card-top">
-        <div class="num">8</div>
-        <div class="card-icon">🎤</div>
-        <div class="card-titles">
-          <div class="card-name">Interview Prep</div>
-          <div class="card-mode">interview-prep mode</div>
-        </div>
-      </div>
-      <div class="focus-label">Confidence</div>
-      <ul class="points">
-        <li>Company-specific likely questions generated</li>
-        <li>STAR+R story bank — grows with every session</li>
-        <li>Culture fit angles &amp; red flag answers</li>
-        <li>Tech stack deep dive for the role</li>
-      </ul>
-    </div>
-
-    <div class="card c9">
-      <div class="card-top">
-        <div class="num">9</div>
-        <div class="card-icon">⚖️</div>
-        <div class="card-titles">
-          <div class="card-name">Offer Comparison</div>
-          <div class="card-mode">ofertas mode</div>
-        </div>
-      </div>
-      <div class="focus-label">Decision Making</div>
-      <ul class="points">
-        <li>Side-by-side weighted scoring of multiple offers</li>
-        <li>Comp, culture, growth, risk &amp; location factors</li>
-        <li>Clear ranked recommendation with reasoning</li>
-        <li>Negotiation leverage points identified</li>
-      </ul>
-    </div>
-
-    <div class="card c10">
-      <div class="card-top">
-        <div class="num">10</div>
-        <div class="card-icon">⏰</div>
-        <div class="card-titles">
-          <div class="card-name">Follow-Up Tracker</div>
-          <div class="card-mode">followup mode</div>
-        </div>
-      </div>
-      <div class="focus-label">Persistence</div>
-      <ul class="points">
-        <li>Flags overdue follow-ups every Friday</li>
-        <li>Drafts follow-up emails in your writing style</li>
-        <li>Full follow-up history in follow-ups.md</li>
-        <li>Never ghost or be ghosted again</li>
-      </ul>
-    </div>
-
-    <div class="card c11">
-      <div class="card-top">
-        <div class="num">11</div>
-        <div class="card-icon">📈</div>
-        <div class="card-titles">
-          <div class="card-name">Pattern Analysis</div>
-          <div class="card-mode">patterns mode</div>
-        </div>
-      </div>
-      <div class="focus-label">Optimization</div>
-      <ul class="points">
-        <li>Detects rejection patterns across history</li>
-        <li>Score distribution analysis over time</li>
-        <li>Targeting improvement suggestions</li>
-        <li>Smarter search strategy after every 10 apps</li>
-      </ul>
-    </div>
-
-    <div class="card c12">
-      <div class="card-top">
-        <div class="num">12</div>
-        <div class="card-icon">🌍</div>
-        <div class="card-titles">
-          <div class="card-name">Multi-LLM &amp; Global</div>
-          <div class="card-mode">cross-platform</div>
-        </div>
-      </div>
-      <div class="focus-label">Compatibility</div>
-      <ul class="points">
-        <li>Claude, Gemini, Codex, Copilot, Qwen, Kimi</li>
-        <li>Open Agent Skill Standard compliant</li>
-        <li>EN · DE · FR · JA · TR · PT language modes</li>
-        <li>DACH, Japan, Turkey market adaptations</li>
-      </ul>
     </div>
 
   </div>
 </div>
 
-<!-- WEEKLY CADENCE -->
-<div class="cadence-section">
-  <div class="cadence-heading">📅 Weekly Workflow — What to Run Each Day</div>
-  <div class="cadence-grid">
-    <div class="cadence-day highlight">
-      <div class="day-name">Monday</div>
-      <div class="day-cmd">git pull</div><br>
-      <div class="day-cmd">pipeline</div><br>
-      <div class="day-cmd">tracker</div>
-      <div class="day-desc">Process overnight jobs + review all application statuses</div>
+<!-- HOW IT WORKS -->
+<div class="flow-section">
+  <div class="section-label">⚡ How it works end-to-end</div>
+  <div class="flow-row">
+
+    <div class="flow-step">
+      <div class="flow-icon-wrap">☁️</div>
+      <div class="flow-label-main">GitHub Actions<br>8 AM IST</div>
+      <div class="flow-label-sub">No PC needed</div>
+      <div class="flow-mine">I built this</div>
     </div>
-    <div class="cadence-day">
-      <div class="day-name">Tuesday</div>
-      <div class="day-cmd">deep</div><br>
-      <div class="day-cmd">apply</div>
-      <div class="day-desc">Research companies before applying. Fill forms for A/B roles.</div>
+
+    <div class="flow-step">
+      <div class="flow-icon-wrap">🔍</div>
+      <div class="flow-label-main">Apify scrapes<br>LinkedIn</div>
+      <div class="flow-label-sub">Filter + dedup</div>
+      <div class="flow-mine">I built this</div>
     </div>
-    <div class="cadence-day">
-      <div class="day-name">Wednesday</div>
-      <div class="day-cmd">contacto</div><br>
-      <div class="day-cmd">apply</div>
-      <div class="day-desc">DM hiring teams after applying. Continue filling applications.</div>
+
+    <div class="flow-step">
+      <div class="flow-icon-wrap">🧠</div>
+      <div class="flow-label-main">Claude AI scores<br>every role A–F</div>
+      <div class="flow-label-sub">7-block evaluation</div>
+      <div class="flow-oss">career-ops</div>
     </div>
-    <div class="cadence-day">
-      <div class="day-name">Thursday</div>
-      <div class="day-cmd">interview-prep</div>
-      <div class="day-desc">Prep for any upcoming interviews. Build your STAR+R story bank.</div>
+
+    <div class="flow-step">
+      <div class="flow-icon-wrap">📄</div>
+      <div class="flow-label-main">Tailored CV PDF<br>auto-generated</div>
+      <div class="flow-label-sub">Per strong match</div>
+      <div class="flow-oss">career-ops</div>
     </div>
-    <div class="cadence-day highlight">
-      <div class="day-name">Friday</div>
-      <div class="day-cmd">followup</div><br>
-      <div class="day-cmd">scan</div>
-      <div class="day-desc">Chase overdue applications. Scan company portals for hidden roles.</div>
+
+    <div class="flow-step">
+      <div class="flow-icon-wrap">💬</div>
+      <div class="flow-label-main">Recruiter found<br>+ DM drafted</div>
+      <div class="flow-label-sub">Right person, not HR</div>
+      <div class="flow-oss">career-ops</div>
     </div>
+
+    <div class="flow-step">
+      <div class="flow-icon-wrap">🎤</div>
+      <div class="flow-label-main">Interview prep<br>generated</div>
+      <div class="flow-label-sub">STAR+R stories</div>
+      <div class="flow-oss">career-ops</div>
+    </div>
+
   </div>
 </div>
 
-<!-- TAKEAWAY -->
-<div class="takeaway-section">
-  <div class="takeaway-icon">🚀</div>
+<!-- WHAT THE SYSTEM CAN DO -->
+<div class="features-section">
+  <div class="section-label">🚀 What the full system does (powered by career-ops open source)</div>
+  <div class="features-grid">
+
+    <div class="feat-card">
+      <div class="feat-icon">📊</div>
+      <div>
+        <div class="feat-name">A–F Job Scoring</div>
+        <div class="feat-desc">7-block evaluation: CV match, comp, culture, red flags, posting legitimacy. Scores 1–5. Tells you not to apply below 4.0.</div>
+      </div>
+    </div>
+
+    <div class="feat-card">
+      <div class="feat-icon">📄</div>
+      <div>
+        <div class="feat-name">Tailored CV PDFs</div>
+        <div class="feat-desc">JD keywords injected into existing experience. ATS-optimized PDF via Playwright. Never invents anything — only reformulates.</div>
+      </div>
+    </div>
+
+    <div class="feat-card">
+      <div class="feat-icon">🏢</div>
+      <div>
+        <div class="feat-name">Company Research</div>
+        <div class="feat-desc">Full intel before applying: funding, layoff history, culture signals, tech stack, Glassdoor reputation. Ghost-job detection built in.</div>
+      </div>
+    </div>
+
+    <div class="feat-card">
+      <div class="feat-icon">💬</div>
+      <div>
+        <div class="feat-name">LinkedIn Outreach</div>
+        <div class="feat-desc">Finds the actual hiring manager (not just HR). Drafts a personalised DM based on their profile. Quality-first, not spammy.</div>
+      </div>
+    </div>
+
+    <div class="feat-card">
+      <div class="feat-icon">🎤</div>
+      <div>
+        <div class="feat-name">Interview Prep</div>
+        <div class="feat-desc">Company-specific questions + STAR+R story bank that grows with every evaluation. Covers culture fit, red flag answers, tech stack.</div>
+      </div>
+    </div>
+
+    <div class="feat-card">
+      <div class="feat-icon">📈</div>
+      <div>
+        <div class="feat-name">Tracks Everything</div>
+        <div class="feat-desc">Full pipeline: Evaluated → Applied → Interview → Offer. Follow-up cadence, rejection patterns, application history. Nothing slips.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- STORY -->
+<div class="story-section">
+  <div class="quote-mark">"</div>
   <div>
-    <div class="tk-label">The Principle</div>
-    <div class="tk-text">
-      <strong>The system finds jobs. You only decide.</strong> Finding is automated (Apify + GitHub Actions). Evaluating is AI (career-ops + Claude).
-      Applying is you — but only to <strong>A/B grades</strong>. 3–5 targeted applications beat 50 generic ones every time.
-      Your personal data (CV, salary targets, phone) <strong>never leaves your machine</strong> — everything sensitive is gitignored by design.
+    <div class="story-text">
+      My friend is a <strong>Performance Engineer at NielsenIQ</strong> — genuinely great at their job — but job searching was eating them alive.
+      2 hours a day, manually. I thought: <strong>this is an engineering problem. It has an engineering solution.</strong><br><br>
+      Built the scraping layer in a weekend using Apify + GitHub Actions. Plugged it into
+      <strong>career-ops</strong> (an amazing open source AI evaluation engine by @santifer) as the intelligence layer.
+      Now their LinkedIn is scraped every night, every role is scored A–F by Claude AI, and tailored CVs are
+      waiting in the <code style="color:#a855f7; font-size:13px;">output/</code> folder before they even wake up.<br><br>
+      <strong>The system finds the jobs. My friend only decides.</strong>
     </div>
-    <div class="tk-chips">
-      <span class="chip cyan">✓ Runs at 8 AM Daily</span>
-      <span class="chip">✓ Open Source (MIT)</span>
-      <span class="chip">✓ Privacy-First</span>
-      <span class="chip">✓ CLI-Agnostic</span>
-      <span class="chip">✓ Multi-Language</span>
-      <span class="chip cyan">✓ Zero Manual Searching</span>
+    <div class="story-chips">
+      <span class="chip chip-cyan">✓ Open Source on GitHub</span>
+      <span class="chip chip-purple">✓ Built on career-ops by @santifer</span>
+      <span class="chip chip-green">✓ Free to use (MIT)</span>
+      <span class="chip chip-purple">✓ Privacy-first — no personal data in repo</span>
+      <span class="chip chip-cyan">✓ Works for any role, any location</span>
     </div>
   </div>
 </div>
@@ -809,9 +654,9 @@
 <div class="footer">
   <div class="footer-left">
     <span class="footer-logo">job-search-automation</span>
-    <span class="footer-tagline">Built by Mehbul Islam · github.com/mehbul/job-search-automation · Built on career-ops by @santifer</span>
+    <span class="footer-name">Built by <strong>Mehbul Islam</strong> — Performance Engineer at NielsenIQ</span>
   </div>
-  <span class="footer-right">The system finds jobs. You only decide.</span>
+  <span class="footer-github">github.com/mehbul/job-search-automation</span>
 </div>
 
 </body>
